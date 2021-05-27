@@ -2,12 +2,14 @@ package com.luoys.onepiece;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Sort {
-    int[] OOO_ARRAY = {1,4,7,1,2,5,8,9,8,6,4,2,12,54,68,98,45};
-    LinkedList<Integer> OOO_LIST = new LinkedList<>(Arrays.asList(1,4,7,1,2,5,8,9,8,6,4,2,12,54,68,98,45));
+    int[] OOO_ARRAY = {10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45};
+    LinkedList<Integer> OOO_LIST = new LinkedList<>(Arrays.asList(10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45));
 
     @Test
     public void bubbleSort() {
@@ -19,21 +21,25 @@ public class Sort {
         System.out.println(OOO_LIST.toString());
     }
 
-
-    public int[] quickSort(int[] number) {
-
-//        quickSort(number, 0, number.length-1);
-        return number;
+    @Test
+    public void quickSort() {
+        System.out.println(OOO_LIST.toString());
+        quickSort(OOO_LIST, 0, OOO_LIST.size() - 1);
+        System.out.println(OOO_LIST.toString());
+        System.out.println(Arrays.toString(OOO_ARRAY));
+        quickSort(OOO_ARRAY, 0, OOO_ARRAY.length - 1);
+        System.out.println(Arrays.toString(OOO_ARRAY));
     }
+
 
     //n-2 + n-3 + n-4 + ··· + 1 = (n-1)*(n-2)/2 = O(n^2)
     public void bubbleSort(int[] array) {
         int number;
         for (int i = 0; i < array.length; i++) {
             for (int j = 1; j < array.length - i; j++) {
-                if (array[j-1] > array[j]) {
-                    number = array[j-1];
-                    array[j-1] = array[j];
+                if (array[j - 1] > array[j]) {
+                    number = array[j - 1];
+                    array[j - 1] = array[j];
                     array[j] = number;
                 }
             }
@@ -44,51 +50,71 @@ public class Sort {
         int number;
         for (int i = 0; i < array.size(); i++) {
             for (int j = 1; j < array.size() - i; j++) {
-                if (array.get(j-1) > array.get(j)) {
-                    number = array.get(j-1);
-                    array.set(j-1, array.get(j));
+                if (array.get(j - 1) > array.get(j)) {
+                    number = array.get(j - 1);
+                    array.set(j - 1, array.get(j));
                     array.set(j, number);
                 }
             }
         }
     }
 
-    void quickSort(LinkedList<Integer> s, int l, int r) {
-        if (l < r) {
+    void quickSort(LinkedList<Integer> array, int l, int r) {
+        if (l >= r) {
+            return;
+        } else if (l < r) {
             int i = l;
             int j = r;
-            int x = s.get(l);
-            for (;i < j; i++) {
-                if (s.get(i) < x) {
-                    s.set(i, s.get(i));
+            int x = array.get(l);
+            while (i < j) {
+                while (i < j && array.get(j) >= x) {
+                    j--;
+                }
+                if (i < j) {
+                    array.set(i, array.get(j));
+                    i++;
+                }
+                while (i < j && array.get(i) < x) {
+                    i++;
+                }
+                if (i < j) {
+                    array.set(j, array.get(i));
+                    j--;
                 }
             }
+            array.set(i, x);
+            quickSort(array, l, i - 1);
+            quickSort(array, i + 1, r);
         }
     }
 
 
     //快速排序
-    void quick_sort(int s[], int l, int r)
-    {
-        if (l < r)
-        {
-            //Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
-            int i = l, j = r, x = s[l];
-            while (i < j)
-            {
-                while(i < j && s[j] >= x) // 从右向左找第一个小于x的数
+    void quickSort(int s[], int l, int r) {
+        if (l < r) {
+            int i = l;
+            int j = r;
+            int x = s[l];
+            while (i < j) {
+                while (i < j && s[j] >= x) {
                     j--;
-                if(i < j)
-                    s[i++] = s[j];
-
-                while(i < j && s[i] < x) // 从左向右找第一个大于等于x的数
+                }
+                if (i < j) {
+                    s[i] = s[j];
                     i++;
-                if(i < j)
-                    s[j--] = s[i];
+                }
+
+                while (i < j && s[i] < x) {
+                    i++;
+                }
+                if (i < j) {
+                    s[j] = s[i];
+                    j--;
+                }
             }
             s[i] = x;
-            quick_sort(s, l, i - 1); // 递归调用
-            quick_sort(s, i + 1, r);
+            quickSort(s, l, i - 1);
+            quickSort(s, i + 1, r);
         }
     }
 }
