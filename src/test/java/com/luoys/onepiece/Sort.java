@@ -46,6 +46,7 @@ public class Sort {
         }
     }
 
+    //n-2 + n-3 + n-4 + ··· + 1 = (n-1)*(n-2)/2 = O(n^2)
     public void bubbleSort(LinkedList<Integer> array) {
         int number;
         for (int i = 0; i < array.size(); i++) {
@@ -59,6 +60,7 @@ public class Sort {
         }
     }
 
+    //1*n + 2*n + 3
     void quickSort(LinkedList<Integer> array, int l, int r) {
         if (l >= r) {
             return;
