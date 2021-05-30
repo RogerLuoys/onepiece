@@ -11,6 +11,7 @@ public class Sort {
     int[] OOO_ARRAY = {10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45};
     LinkedList<Integer> OOO_LIST = new LinkedList<>(Arrays.asList(10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45));
 
+    //冒泡排序
     @Test
     public void bubbleSort() {
         System.out.println(Arrays.toString(OOO_ARRAY));
@@ -21,6 +22,7 @@ public class Sort {
         System.out.println(OOO_LIST.toString());
     }
 
+    // 快速排序
     @Test
     public void quickSort() {
         System.out.println(Arrays.toString(OOO_ARRAY));
@@ -31,6 +33,7 @@ public class Sort {
         System.out.println(OOO_LIST.toString());
     }
 
+    // 选择排序
     @Test
     public void selectSort() {
         System.out.println(Arrays.toString(OOO_ARRAY));
@@ -41,6 +44,13 @@ public class Sort {
         System.out.println(OOO_LIST.toString());
     }
 
+    // 插入排序
+    @Test
+    public void insertSort() {
+        System.out.println(OOO_LIST.toString());
+        insertSort(OOO_LIST);
+        System.out.println(OOO_LIST.toString());
+    }
 
     //n-2 + n-3 + n-4 + ··· + 1 = (n-1)*(n-2)/2 = O(n^2)
     public void bubbleSort(int[] array) {
@@ -107,8 +117,17 @@ public class Sort {
         }
     }
 
-    void insertSort(int[] array) {
-
+    // O(n^2)
+    void insertSort(LinkedList<Integer> array) {
+        for (int i = 1; i < array.size(); i++) {
+            for (int j = i; j > 0; j--) {
+                if (array.get(j) < array.get(j-1)) {
+                    array.add(j-1, array.get(j));
+                    array.remove(j+1);
+                }
+                System.out.println(OOO_LIST.toString());
+            }
+        }
     }
 
     //O(log2^n) ~ O(n^2)
