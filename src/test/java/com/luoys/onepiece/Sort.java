@@ -23,12 +23,22 @@ public class Sort {
 
     @Test
     public void quickSort() {
-        System.out.println(OOO_LIST.toString());
-        quickSort(OOO_LIST, 0, OOO_LIST.size() - 1);
-        System.out.println(OOO_LIST.toString());
         System.out.println(Arrays.toString(OOO_ARRAY));
         quickSort(OOO_ARRAY, 0, OOO_ARRAY.length - 1);
         System.out.println(Arrays.toString(OOO_ARRAY));
+        System.out.println(OOO_LIST.toString());
+        quickSort(OOO_LIST, 0, OOO_LIST.size() - 1);
+        System.out.println(OOO_LIST.toString());
+    }
+
+    @Test
+    public void selectSort() {
+        System.out.println(Arrays.toString(OOO_ARRAY));
+        selectSort(OOO_ARRAY);
+        System.out.println(Arrays.toString(OOO_ARRAY));
+        System.out.println(OOO_LIST.toString());
+        selectSort(OOO_LIST);
+        System.out.println(OOO_LIST.toString());
     }
 
 
@@ -60,7 +70,48 @@ public class Sort {
         }
     }
 
-    //1*n + 2*n + 3
+    // n*(n-1)/2 = O{n^2)
+    void selectSort(int[] array) {
+        int min;
+        int tmp;
+        for(int i = 0; i < array.length; i++) {
+            min = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[min] > array[j]) {
+                    min = j;
+                }
+            }
+            if (i != min) {
+                tmp = array[i];
+                array[i] = array[min];
+                array[min] = tmp;
+            }
+        }
+    }
+
+    void selectSort(LinkedList<Integer> array) {
+        int min;
+        int tmp;
+        for (int i = 0; i < array.size(); i++) {
+            min = i;
+            for(int j = i + 1; j < array.size(); j++) {
+                if (array.get(min) > array.get(j)) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                tmp = array.get(i);
+                array.set(i, array.get(min));
+                array.set(min, tmp);
+            }
+        }
+    }
+
+    void insertSort(int[] array) {
+
+    }
+
+    //O(log2^n) ~ O(n^2)
     void quickSort(LinkedList<Integer> array, int l, int r) {
         if (l >= r) {
             return;
