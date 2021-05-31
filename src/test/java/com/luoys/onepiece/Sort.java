@@ -52,6 +52,14 @@ public class Sort {
         System.out.println(OOO_LIST.toString());
     }
 
+    // 希尔排序
+    @Test
+    public void shellSort() {
+        System.out.println(Arrays.toString(OOO_ARRAY));
+        shellSort(OOO_ARRAY);
+        System.out.println(Arrays.toString(OOO_ARRAY));
+    }
+
     //n-2 + n-3 + n-4 + ··· + 1 = (n-1)*(n-2)/2 = O(n^2)
     public void bubbleSort(int[] array) {
         int number;
@@ -125,7 +133,21 @@ public class Sort {
                     array.add(j-1, array.get(j));
                     array.remove(j+1);
                 }
-                System.out.println(OOO_LIST.toString());
+            }
+        }
+    }
+
+    void shellSort(int[] array) {
+        int tmp;
+        for (int gap = array.length / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < array.length; i++) {
+                for (int j = i; j >= gap; j -= gap) {
+                    if (array[j] < array[j-gap]) {
+                        tmp = array[j-gap];
+                        array[j-gap] = array[j];
+                        array[j] = tmp;
+                    }
+                }
             }
         }
     }
