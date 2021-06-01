@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Sort {
-    int[] OOO_ARRAY = {10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45};
-    LinkedList<Integer> OOO_LIST = new LinkedList<>(Arrays.asList(10, 1, 4, 7, 1, 21, 5, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45));
+    int[] OOO_ARRAY = {10, 1, 4, 7, 1, 21, 5, -9, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45};
+    LinkedList<Integer> OOO_LIST = new LinkedList<>(Arrays.asList(10, 1, 4, 7, 1, 21, 5, -9, 83, 9, 8, 6, 4, 2, 12, 54, 68, 98, 45));
 
     //冒泡排序
     @Test
@@ -57,6 +57,13 @@ public class Sort {
     public void shellSort() {
         System.out.println(Arrays.toString(OOO_ARRAY));
         shellSort(OOO_ARRAY);
+        System.out.println(Arrays.toString(OOO_ARRAY));
+    }
+
+    @Test
+    public void mergeSort() {
+        System.out.println(Arrays.toString(OOO_ARRAY));
+        mergeSort(OOO_ARRAY);
         System.out.println(Arrays.toString(OOO_ARRAY));
     }
 
@@ -148,6 +155,39 @@ public class Sort {
                         array[j] = tmp;
                     }
                 }
+            }
+        }
+    }
+
+    void mergeSort(int[] array) {
+        if (array.length > 1) {
+            int mid = array.length / 2;
+            int[] left = Arrays.copyOfRange(array, 0, mid);
+            int[] right = Arrays.copyOfRange(array, mid, array.length);
+            mergeSort(left);
+            mergeSort(right);
+            int i = 0;
+            int l = 0;
+            int r = 0;
+            while (l < left.length && r < right.length) {
+                if (left[l] < right[r]) {
+                    array[i] = left[l];
+                    l++;
+                } else {
+                    array[i] = right[r];
+                    r++;
+                }
+                i++;
+            }
+            while (l < left.length) {
+                array[i] = left[l];
+                i++;
+                l++;
+            }
+            while (r < right.length) {
+                array[i] = right[r];
+                i++;
+                r++;
             }
         }
     }
